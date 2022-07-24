@@ -742,6 +742,7 @@ class Stock(StrLib):
     def show(self, token, bar, BMbar):
         self.cal(bar, BMbar)
         self.data = yf.Ticker(token)
+        self.news = self.data.news
         print('-----------------STOCK INFO--------------------')
         print("Stock:", token)
         print("Beta:",round(self.Beta,2))
@@ -751,8 +752,9 @@ class Stock(StrLib):
         print("Cash Flow:", self.data.cashflow)
         print("Balance Sheet:", self.data.balance_sheet)
         print("Financial Sheet:", self.data.financials)
-        print("News:",self.data.news)
-        print('-----------------------------------------------')     
+        for i in self.news:
+            print("News Title:",i['title'],". Related Tickers:",i['relatedTickers'],". Publish Time:",i['providerPublishTime'])
+        print('-----------------------------------------------')    
 
     
 class SelResult:
